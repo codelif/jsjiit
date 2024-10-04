@@ -42,7 +42,7 @@
         const encrypted = await window.crypto.subtle.encrypt(
             { name: 'AES-CBC', iv: IV },
             key,
-            pad(data)
+            data
         );
         return new Uint8Array(encrypted);
     }
