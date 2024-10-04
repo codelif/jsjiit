@@ -1,4 +1,3 @@
-// import {generateDateSeq, getRandomCharSeq} from "utils.js"
 
  function base64Encode(data) {
         return btoa(String.fromCharCode.apply(null, new Uint8Array(data)));
@@ -58,21 +57,6 @@
         return new Uint8Array(decrypted);
     }
 
-    // Padding function (mimicking PKCS#7)
-    function pad(data) {
-        const blockSize = 16;
-        const padding = blockSize - (data.length % blockSize);
-        const padded = new Uint8Array(data.length + padding);
-        padded.set(data);
-        padded.fill(padding, data.length);
-        return padded;
-    }
-
-    // Unpadding function (removing PKCS#7 padding)
-    function unpad(data) {
-        const paddingLength = data[data.length - 1];
-        return data.slice(0, data.length - paddingLength);
-    }
 
     // Function to deserialize the payload (decrypts base64 payload)
   async function deserializePayload(payload) {
