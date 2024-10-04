@@ -55,7 +55,7 @@
             key,
             data
         );
-        return unpad(new Uint8Array(decrypted));
+        return new Uint8Array(decrypted);
     }
 
     // Padding function (mimicking PKCS#7)
