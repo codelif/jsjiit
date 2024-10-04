@@ -22,7 +22,8 @@ async function __hit(method, url, options = {}) {
         headers = this.session.getHeaders(); // Assuming session has getHeaders() method
         delete options.authenticated;
     } else {
-        headers = { "LocalName": await generateLocalName() }; // Assuming generateLocalName is defined elsewhere
+        let localname = await generateLocalName();
+        headers = { "LocalName": localname }; // Assuming generateLocalName is defined elsewhere
     }
 
     // Merge provided headers with default headers
@@ -61,5 +62,4 @@ async function __hit(method, url, options = {}) {
 const API = "https://webportal.jiit.ac.in:6011/StudentPortalAPI";
 let endpoint  = "/token/pretoken-check"
 let payload = "E/36gm1xclGgS/frDjzAM7J53ktoc7uo3Btt1b3hKTMleKWUcg8B6n9Hb+qN7jVM1XCqB8izfQkmgZvm6UKzjPQJmUILm+BGyzf1MNXi6qpWAAesCSd1UYLZwrbVW63a";
-console.log(await __hit("POST", API+endpoint, {body: payload}));
 
