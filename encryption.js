@@ -78,7 +78,7 @@
   async function deserializePayload(payload) {
         const pbytes = base64Decode(payload);
         const raw = await decrypt(pbytes);
-        return new TextDecoder().decode(raw);
+        return JSON.parse(new TextDecoder().decode(raw));
     }
 
     // Function to serialize the payload (encrypts and returns base64 string)
