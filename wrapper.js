@@ -72,6 +72,6 @@ async function student_login(username, password, captcha = DEFCAPTCHA){
   let payload = {username: username, usertype: "S", captcha: captcha};
   payload = serializePayload(payload);
 
-  return __hit("POST", API+pretoken_endpoint, {data: payload})
+  return __hit("POST", API+pretoken_endpoint, {body: payload})
 }
 
