@@ -39,10 +39,9 @@ async function __hit(method, url, options = {}) {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
                 ...options.headers
             },
-            body: JSON.stringify(options.body || {}),
+            body: options.body,
         });
 
         // Convert the response to JSON
