@@ -70,7 +70,7 @@ async function student_login(username, password, captcha = DEFCAPTCHA){
   let token_endpoint = "/token/generate-token1";
 
   let payload = {username: username, usertype: "S", captcha: captcha};
-  payload = serializePayload(payload);
+  payload = await serializePayload(payload);
 
   return __hit("POST", API+pretoken_endpoint, {body: payload})
 }
