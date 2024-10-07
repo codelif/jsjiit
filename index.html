@@ -7,8 +7,22 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
+    <label for="user">Username</label>
+    <input id="user" name="user" type="text"></input>
+    <label for="pass">Password</label>
+    <input id="pass name="pass" type="text"></input>
+    <button onclick="signin();">Submit</button>
+
     <script src="utils.js"></script>
     <script src="encryption.js"></script>
     <script src="wrapper.js"></script>
+    <script>
+      function signin(){
+        let user = document.getElementById("user");
+        let pass = document.getElementById("pass");
+
+        student_login(user, pass);
+      }
+    </script>
 </body>
 </html>

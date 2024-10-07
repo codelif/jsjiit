@@ -60,6 +60,18 @@ async function __hit(method, url, options = {}) {
     }
 }
 const API = "https://webportal.jiit.ac.in:6011/StudentPortalAPI";
-let endpoint  = "/token/pretoken-check"
-let payload = "E/36gm1xclGgS/frDjzAM7J53ktoc7uo3Btt1b3hKTMleKWUcg8B6n9Hb+qN7jVM1XCqB8izfQkmgZvm6UKzjPQJmUILm+BGyzf1MNXi6qpWAAesCSd1UYLZwrbVW63a";
+
+
+const DEFCAPTCHA = {captcha: "phw5n", hidden: "gmBctEffdSg="};
+
+
+async function student_login(username, password, captcha = DEFCAPTCHA){
+  let pretoken_endpoint  = "/token/pretoken-check";  
+  let token_endpoint = "/token/generate-token1";
+
+  let payload = {username: username, usertype: "S", captcha: captcha};
+  payload = serializePayload(payload);
+
+  return __hit("POST", API+pretoken_endpoint, {data: payload})
+}
 
