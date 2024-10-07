@@ -1,0 +1,23 @@
+#!/usr/bin/python
+
+## this script will create a root certificate for localhost, and run a https server on the running folder
+## its kinda a https equivalent of `python -m http.server`
+## THIS IS FOR TESTING PURPOSE, SO I DON'T HAVE TO PUSH THIS TO GITHUB PAGES EVERYTIME.
+
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+import ssl
+import subprocess
+
+print("Generating Self-Signed Certificates... ", end="")
+subprocess.run("openssl req -nodes -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -subj /CN=mylocalhost".split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+print("done")
+
+
+port = 8000
+httpd = HTTPServer(('0.0.0.0', port), SimpleHTTPRequestHandler)
+
+ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+ctx.load_cert_chain(keyfile='key.pem', certfile='cert.pem')
+httpd.socket = ctx.wrap_socket(httpd.socket, server_side=True)
+print(f"Server running on https://0.0.0.0:{port}")
+httpd.serve_forever()
